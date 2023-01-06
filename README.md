@@ -103,7 +103,7 @@ def from_mol(mol_file, y=None, smiles=None):
         xc.append([positions.x, positions.y, positions.z])
         xs.append(x)
     
-    x = torch.tensor(xs, dtype=torch.float).view(-1, 1)  # Embedding 사용 시 dtype=torch.long
+    x = torch.tensor(xs, dtype=torch.float).view(-1, 1) 
     xc = torch.tensor(xc, dtype=torch.float).view(-1, 3)
     edge_indices, edge_attrs = [], []
     for bond in mol.GetBonds():
@@ -117,7 +117,7 @@ def from_mol(mol_file, y=None, smiles=None):
 
     edge_index = torch.tensor(edge_indices)
     edge_index = edge_index.t().to(torch.long).view(2, -1)
-    edge_attr = torch.tensor(edge_attrs, dtype=torch.float).view(-1, 1)  # Embedding 사용 시 dtype=torch.long
+    edge_attr = torch.tensor(edge_attrs, dtype=torch.float).view(-1, 1)  
 
     if edge_index.numel() > 0:  # Sort indices.
         perm = (edge_index[0] * x.size(0) + edge_index[1]).argsort()
