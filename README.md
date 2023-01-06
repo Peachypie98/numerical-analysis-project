@@ -339,7 +339,7 @@ class GaussianSmearing(torch.nn.Module):##RDF용
         self.register_buffer('offset', offset)
 
     def forward(self, dist: Tensor) -> Tensor:
-        dist = dist.view(-1, 1) - self.offset.view(1, -1)#edge_weight = (pos[row] - pos[col]).norm(dim=-1) # 분자사이 거리를 동해 회전 불변성을 얻는다. 에시)매트릭스 회전 원래값
+        dist = dist.view(-1, 1) - self.offset.view(1, -1) # edge_weight = (pos[row] - pos[col]).norm(dim=-1). 분자사이 거리를 동해 회전 불변성을 얻는다. 에시)매트릭스 회전 원래값
         return torch.exp(self.coeff * torch.pow(dist, 2)) # RDF 뉴럴 네트워크가 linear해지는 것을 방지한다. linear해지면 트랜딩 학습에 어려움
         # num_gaussians증가 |self.coeff| 증가 더 뾰족 RDF
 
