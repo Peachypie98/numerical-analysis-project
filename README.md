@@ -3,7 +3,7 @@
 .
 
 ## Procedure
-### Dataset
+### 1. Dataset
 ```shell
 # allowable multiple choice node and edge features
 allowable_features = {
@@ -92,4 +92,38 @@ def from_mol(mol_file, y=None, smiles=None):
         edge_index, edge_attr = edge_index[:, perm], edge_attr[perm]
 
     return Data(x=x, pos=xc, y=y, edge_index=edge_index, edge_attr=edge_attr, smiles=smiles)
+```
+```shell
+train = pd.read_csv(r"./train.csv")
+test = pd.read_csv(r"./test.csv")
+
+# ============== training data ================== #
+for idx in tqdm(train.index):
+    y = [train["mu"][idx]]
+    i = train["Id"][idx]
+    data = from_mol(fr"./mol/train/{i}.mol", y=y)
+    torch.save(data,fr"./data/train/{i}.pt")
+    
+# ============== test data ================== #
+for idx in tqdm(test.index):
+    i = test["Id"][idx]
+    data = from_mol(fr"./mol/test/{i}.mol")  
+    torch.save(data, fr"./data/test/{i}.pt")
+
+train = pd.read_csv(r"./train.csv", index_col=0)
+test = pd.read_csv(r"./test.csv", index_col=0)
+train_num_nodes_list = list()
+test_num_nodes_list = list()
+train_list = list()
+test_list = list()
+
+for idx in tqdm(train.index):
+    d = torch.load(fr"./data/train/{idx}.pt")
+    train_list.append(d)
+    train_num_nodes_list.append(d.num_nodes)
+
+for idx in tqdm(test.index):
+    d = torch.load(fr"./data/test/{idx}.pt")
+    test_list.append(d)
+    test_num_nodes_list.append(d.num_nodes)
 ```
