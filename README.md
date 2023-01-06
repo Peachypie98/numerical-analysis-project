@@ -190,7 +190,7 @@ class SchNet(torch.nn.Module):
         hidden_channels: int = 128,
         num_filters: int = 128,
         num_interactions: int = 4,
-        num_gaussians: int = 100, #커지면 빠른 학습
+        num_gaussians: int = 100, # 커지면 빠른 학습
         cutoff: float = 10.0,
         interaction_graph: Optional[Callable] = None,
         max_num_neighbors: int = 32,
@@ -223,7 +223,7 @@ class SchNet(torch.nn.Module):
 
         self.distance_expansion = GaussianSmearing(0.0, cutoff, num_gaussians)
 
-        self.interactions = ModuleList()## 들어갈 블럭을 만듬
+        self.interactions = ModuleList() ## 들어갈 블럭을 만듬
         for _ in range(num_interactions):
             block = InteractionBlock(hidden_channels, num_gaussians,
                                      num_filters, cutoff)
