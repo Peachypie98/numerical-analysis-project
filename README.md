@@ -20,7 +20,7 @@ Training Configurations:
 <div align="center"><img src="./results/original_schnet.png" width="500"></div>
 
 **Modified SchNet Architecture**
-<div align="center"><img src="./results/modified_schNet.jpg" width="500"></div>
+<div align="center"><img src="./results/modified_schnet.jpg" width="500"></div>
 
 ## Procedure
 ### 1. Pre-Requisities
