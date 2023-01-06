@@ -5,15 +5,18 @@
 ## Procedure
 ### 1. Pre-Requisities
 ```shell
+import os
+import os.path as osp
+import warnings
 import torch
 import pandas as pd
 import numpy as np
+import math
 import torch_geometric.transforms as T
 import torch.nn as nn
 import torch.nn.functional as F 
 
 from tqdm import tqdm
-import math
 from glob import glob
 from rdkit import Chem, RDLogger
 from torch_geometric.data import Data
@@ -21,11 +24,6 @@ from torch_geometric.loader import DataLoader
 from torch_geometric.nn.conv import MessagePassing
 from torch_geometric.nn import global_mean_pool as gap, global_max_pool as gmp
 from torch_geometric.nn import Linear
-
-
-import os
-import os.path as osp
-import warnings
 from math import pi as PI
 from typing import Callable, Optional, Tuple
 from torch import Tensor
