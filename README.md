@@ -413,9 +413,7 @@ for batch in testset:
     predicted = model(batch)
     for value in predicted:
         output.append(value.item())
-
-
-
+        
 submission = pd.DataFrame(output)
 name=[]
 for i in range(len(output)):
