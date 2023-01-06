@@ -448,4 +448,10 @@ submission.head(3)
 <div align="center"><img src="./results/function shape.png" width="500"></div>
 
 ### Shifted Softplus &rarr; Tanh
-<div align="center"><img src="./results/activation_output.png" height= 500, width="500"></div>
+<div align="center"><img src="./results/activation_output.png", width="500"></div>
+
+### SchNet vs GCN
+<div align="center"><img src="./results/GCN_SCH_TANB.png", width="500"></div>
+
+### Final Result
+<div align="center"><img src="./results/results.png", width="500"></div>
