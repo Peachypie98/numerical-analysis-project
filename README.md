@@ -1,6 +1,6 @@
 # numerical-analysis-project
 ## Aim
-.
+Given amino acids molecule datasets, we want to predict the dipole moment of other amino acids. 
 
 ## Procedure
 ### 1. Pre-Requisities
@@ -425,3 +425,7 @@ submission.columns=['predicted']
 submission.to_csv('./our_Submission.csv')
 submission.head(3)
 ```
+
+## 6. Results
+### Activation Functions used in comparative experiments
+
