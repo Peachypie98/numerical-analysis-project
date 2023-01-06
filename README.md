@@ -164,7 +164,7 @@ for idx in tqdm(test.index):
 ```shell
 class SchNet(torch.nn.Module):
     url = 'http://www.quantum-machine.org/datasets/trained_schnet_models.zip'
-
+    
     def __init__(
         self,
         hidden_channels: int = 128,
@@ -193,8 +193,6 @@ class SchNet(torch.nn.Module):
         self.mean = mean
         self.std = std
         self.scale = None
-
-      
         self.embedding = Embedding(100, hidden_channels, padding_idx=0)
 
         if interaction_graph is not None:
@@ -211,11 +209,10 @@ class SchNet(torch.nn.Module):
                                      num_filters, cutoff)
             self.interactions.append(block)
 
-        self.lin1 = Linear(hidden_channels, hidden_channels // 2) ##########
-        self.act  = nn.Tanh()  ###############################
-        self.lin2 = Linear(hidden_channels // 2, 1) #############
+        self.lin1 = Linear(hidden_channels, hidden_channels // 2)
+        self.act  = nn.Tanh()  
+        self.lin2 = Linear(hidden_channels // 2, 1)
         self.bn =nn.BatchNorm1d(hidden_channels // 2)
-
         self.register_buffer('initial_atomref', atomref)
         self.reset_parameters()
 
@@ -228,8 +225,6 @@ class SchNet(torch.nn.Module):
         torch.nn.init.xavier_uniform_(self.lin2.weight)
         self.lin2.bias.data.fill_(0)
 
-
-
     def forward(self, z: Tensor, pos: Tensor,
                 batch: OptTensor = None) -> Tensor:
         
@@ -237,7 +232,7 @@ class SchNet(torch.nn.Module):
 
         h = self.embedding(z)
         edge_index, edge_weight = self.interaction_graph(pos, batch)
-        edge_attr = self.distance_expansion(edge_weight)##RDF값
+        edge_attr = self.distance_expansion(edge_weight) # RDF값
 
         for interaction in self.interactions:
             h = h + interaction(h, edge_index, edge_weight, edge_attr)
@@ -249,7 +244,6 @@ class SchNet(torch.nn.Module):
 
         out = self.readout(h, batch, dim=0)
         return out
-
 
     def __repr__(self) -> str:
         return (f'{self.__class__.__name__}('
@@ -273,7 +267,6 @@ class RadiusInteractionGraph(torch.nn.Module):
         edge_weight = (pos[row] - pos[col]).norm(dim=-1)
         return edge_index, edge_weight
 
-
 class InteractionBlock(torch.nn.Module):
     def __init__(self, hidden_channels: int, num_gaussians: int,
                  num_filters: int, cutoff: float):
@@ -287,7 +280,7 @@ class InteractionBlock(torch.nn.Module):
                            self.mlp, cutoff)
         self.act =nn.Tanh()
         self.lin = Linear(hidden_channels, hidden_channels)
-
+        
         self.reset_parameters()
 
     def reset_parameters(self):
@@ -325,8 +318,8 @@ class CFConv(MessagePassing):
 
     def forward(self, x: Tensor, edge_index: Tensor, edge_weight: Tensor,
                 edge_attr: Tensor) -> Tensor:
-        C = 0.5 * (torch.cos(edge_weight * PI / self.cutoff) + 1.0)#웨이트로 계산과정
-        W = self.nn(edge_attr) * C.view(-1, 1)##웨이트 계산 웨이트는 pos과 분자의 dimension을 계산
+        C = 0.5 * (torch.cos(edge_weight * PI / self.cutoff) + 1.0) # 웨이트로 계산과정
+        W = self.nn(edge_attr) * C.view(-1, 1) # 웨이트 계산 웨이트는 pos과 분자의 dimension을 계산
 
         x = self.lin1(x)#
         x = self.propagate(edge_index, x=x, W=W)
@@ -346,9 +339,9 @@ class GaussianSmearing(torch.nn.Module):##RDF용
         self.register_buffer('offset', offset)
 
     def forward(self, dist: Tensor) -> Tensor:
-        dist = dist.view(-1, 1) - self.offset.view(1, -1)#edge_weight = (pos[row] - pos[col]).norm(dim=-1) 분자사이 거리를 동해 회전 불변성을 얻는다. 에시)매트릭스 회전 원래값
-        return torch.exp(self.coeff * torch.pow(dist, 2))#RDF 뉴럴 네트워크가 linear해지는 것을 방지한다.linear해지면 트랜딩 학습에 어려움
-        #num_gaussians증가 |self.coeff| 증가 더 뾰족 RDF
+        dist = dist.view(-1, 1) - self.offset.view(1, -1)#edge_weight = (pos[row] - pos[col]).norm(dim=-1) # 분자사이 거리를 동해 회전 불변성을 얻는다. 에시)매트릭스 회전 원래값
+        return torch.exp(self.coeff * torch.pow(dist, 2)) # RDF 뉴럴 네트워크가 linear해지는 것을 방지한다. linear해지면 트랜딩 학습에 어려움
+        # num_gaussians증가 |self.coeff| 증가 더 뾰족 RDF
 
 
 class ShiftedSoftplus(torch.nn.Module):
