@@ -160,7 +160,7 @@ for idx in tqdm(test.index):
     test_num_nodes_list.append(d.num_nodes)
 ```
 
-## 3. SchNet Model
+## 3. Modified SchNet Model
 ```shell
 class SchNet(torch.nn.Module):
     url = 'http://www.quantum-machine.org/datasets/trained_schnet_models.zip'
