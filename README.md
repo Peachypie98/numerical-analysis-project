@@ -456,7 +456,7 @@ submission.to_csv('./our_Submission.csv')
 submission.head(3)
 ```
 
-## 6. Results
+## 8. Results
 ### Activation Functions
 <div align="center"><img src="./results/function shape.png" width="500"></div>
 
