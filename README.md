@@ -466,5 +466,5 @@ submission.head(3)
 ```shell
 1. Clone this repository
 2. Unzip mol file
-3. Run the code in order from procedure 1 to 5
+3. Run the code in order from procedure 1 to 5 (Use gpu to train, training with cpu will take excessive amount of time)
  ```
