@@ -1,6 +1,7 @@
 # Numerical Analysis Project
 ## Aim
-Given amino acids molecule datasets, we want to predict the dipole moment of other amino acids. 
+Given amino acids molecule datasets, we want to predict the dipole moment of other amino acids.  
+In this project, we used modified SchNet Model to improve the overall performance and tested out with GCN model for comparison.
 
 ## Procedure
 ### 1. Pre-Requisities
