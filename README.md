@@ -445,7 +445,7 @@ submission.head(3)
 
 ## 6. Results
 ### Activation Functions
-<div align="center"><img src="./results/function shape.png" width="350"></div>
+<div align="center"><img src="./results/function shape.png" width="500"></div>
 
-### Shifted Softplus --> Tanh
-<div align="center"><img src="./results/activation_output.png" width="350"></div>
+### Shifted Softplus &rarr; Tanh
+<div align="center"><img src="./results/activation_output.png" height= 500, width="500"></div>
