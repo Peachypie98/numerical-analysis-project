@@ -447,7 +447,7 @@ submission.head(3)
 ### Activation Functions
 <div align="center"><img src="./results/function shape.png" width="500"></div>
 
-### Shifted Softplus vs Tanh
+### Tanh vs Shifted Softplus vs BentIdentity
 <div align="center"><img src="./results/activation_output.png", width="500"></div>
 
 ### SchNet vs GCN
