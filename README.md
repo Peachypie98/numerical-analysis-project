@@ -404,7 +404,7 @@ for epoch in range(1000):
 print('Training process has finished!')
 ```
 
-## 5. Submission
+## 5. Evaluation 
 ```shell
 output = list()
 model.train()
@@ -413,7 +413,10 @@ for batch in testset:
     predicted = model(batch)
     for value in predicted:
         output.append(value.item())
-        
+ ```
+ 
+ ## 6. Submission
+ ```shell     
 submission = pd.DataFrame(output)
 name=[]
 for i in range(len(output)):
@@ -427,5 +430,6 @@ submission.head(3)
 ```
 
 ## 6. Results
-### Activation Functions used in comparative experiments
+### Activation Functions
+<div align="center"><img src="function shape.png" width="350"></div>
 
