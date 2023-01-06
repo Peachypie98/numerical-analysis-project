@@ -1,7 +1,7 @@
 # Numerical Analysis Project
 ## Aim
 Given amino acids molecule datasets, we want to predict the dipole moment of other amino acids.  
-In this project, we used modified SchNet Model to improve the overall performance and tested out with GCN model for comparison.
+In this project, we used modified SchNet model to improve the overall performance and tested out with GCN model for comparison.
 
 What we modified:
 * added batch layer normalization
@@ -447,3 +447,5 @@ submission.head(3)
 ### Activation Functions
 <div align="center"><img src="./results/function shape.png" width="350"></div>
 
+### Shifted Softplus --> Tanh
+<div align="center"><img src="./results/activation_output.png" width="350"></div>
