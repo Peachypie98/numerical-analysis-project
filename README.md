@@ -23,7 +23,14 @@ Training Configurations:
 <div align="center"><img src="./results/modified_schnet.jpg" width="500"></div>
 
 ## Procedure
-### 1. Pre-Requisities
+### 1. Requirements
+```shell
+1. Pytorch
+2. Pytorch Geometric
+3. Rdkit
+```
+
+### 2. Pre-Requisities
 ```shell
 import os
 import os.path as osp
@@ -55,7 +62,7 @@ from torch_geometric.nn.resolver import aggregation_resolver as aggr_resolver
 from torch_geometric.typing import OptTensor
 ```
 
-### 2. Dataset
+### 3. Dataset
 ```shell
 # allowable multiple choice node and edge features
 allowable_features = {
@@ -180,7 +187,7 @@ for idx in tqdm(test.index):
     test_num_nodes_list.append(d.num_nodes)
 ```
 
-## 3. Modified SchNet Model
+## 4. Modified SchNet Model
 ```shell
 class SchNet(torch.nn.Module):
     url = 'http://www.quantum-machine.org/datasets/trained_schnet_models.zip'
@@ -395,7 +402,7 @@ class Model(torch.nn.Module):
         return x
 ```
 
-## 4. Learning
+## 5. Learning
 ```shell
 trainset = DataLoader(train_list, batch_size = 64, shuffle = True)
 testset = DataLoader(test_list, batch_size = 64, shuffle = False)
@@ -424,7 +431,7 @@ for epoch in range(1000):
 print('Training process has finished!')
 ```
 
-## 5. Evaluation 
+## 6. Evaluation 
 ```shell
 output = list()
 model.train()
@@ -435,7 +442,7 @@ for batch in testset:
         output.append(value.item())
  ```
  
- ## 6. Submission
+ ## 7. Submission
  ```shell     
 submission = pd.DataFrame(output)
 name=[]
@@ -466,5 +473,5 @@ submission.head(3)
 ```shell
 1. Clone this repository
 2. Unzip mol file
-3. Run the code in order from procedure 1 to 5 (Use gpu to train, training with cpu will take excessive amount of time)
- ```
+3. Run the code in order from procedure 1 to 6 (Use gpu to train, training with cpu will take excessive amount of time)
+```
