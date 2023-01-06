@@ -16,6 +16,12 @@ Training Configurations:
 * Weight Decay: 0
 * Adam Optimizer
 
+**Original SchNet Architecture**
+<div align="center"><img src="./results/original_schnet.png" width="500"></div>
+
+**Modified SchNet Architecture**
+<div align="center"><img src="./results/modified_schNet.jpg" width="500"></div>
+
 ## Procedure
 ### 1. Pre-Requisities
 ```shell
