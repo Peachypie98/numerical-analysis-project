@@ -431,5 +431,5 @@ submission.head(3)
 
 ## 6. Results
 ### Activation Functions
-<div align="center"><img src="function shape.png" width="350"></div>
+<div align="center"><img src="./results/function shape.png" width="350"></div>
 
