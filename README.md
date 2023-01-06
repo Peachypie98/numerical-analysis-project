@@ -360,3 +360,70 @@ class bentIdentity(torch.nn.Module):
     def forward(self, x: Tensor) -> Tensor:
         return ((torch.sqrt(x**2 + 1) - 1)/2) + x
 ```
+
+```shell
+class Model(torch.nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.layer = SchNet()
+   
+    def forward(self, data):
+        x, edge_index, batch, edge_attr, pos = data.x, data.edge_index, data.batch, data.edge_attr, data.pos
+        x = x.long()
+        x = (self.layer(x.squeeze(1), pos,batch))
+
+        return x
+```
+
+## 4. Learning
+```shell
+trainset = DataLoader(train_list, batch_size = 64, shuffle = True)
+testset = DataLoader(test_list, batch_size = 64, shuffle = False)
+
+device = torch.device('cuda')
+model = Model().to(device)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.0008, weight_decay=0e-4)
+
+model.train()
+for epoch in range(1000):
+    lossSum,count=0,0
+    for batch in trainset:
+        batch.to(device)
+        optimizer.zero_grad()
+        out = model(batch)
+        loss = torch.nn.MSELoss()(out.squeeze(1), batch.y)
+        loss.backward()
+        optimizer.step()
+        lossSum+=loss
+        count+=1
+    total_loss = lossSum/count
+    print("Epoch: {}, Loss: {:.6f}".format(epoch, total_loss))
+    if total_loss<=0.0018:
+        break
+
+print('Training process has finished!')
+```
+
+## 5. Submission
+```shell
+output = list()
+model.train()
+for batch in testset:
+    batch.to(device)
+    predicted = model(batch)
+    for value in predicted:
+        output.append(value.item())
+
+
+
+submission = pd.DataFrame(output)
+name=[]
+for i in range(len(output)):
+    name.append('test_{0}'.format(i))
+    
+submission.index=name
+submission.head(3)
+submission.columns=['predicted']
+submission.to_csv('./our_Submission.csv')
+submission.head(3)
+```
