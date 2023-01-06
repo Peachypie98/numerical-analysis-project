@@ -22,7 +22,7 @@ Training Configurations:
 **Modified SchNet Architecture**
 <div align="center"><img src="./results/modified_schnet.jpg" width="500"></div>
 
-## Procedure
+## Procedures
 ### 1. Requirements
 ```shell
 1. Pytorch
