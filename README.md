@@ -439,7 +439,7 @@ print('Training process has finished!')
 ## 6. Evaluation 
 ```shell
 output = list()
-model.train()
+model.eval()
 for batch in testset:
     batch.to(device)
     predicted = model(batch)
