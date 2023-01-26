@@ -474,9 +474,13 @@ submission.head(3)
 ### Final Result
 <div align="center"><img src="./results/results.png", width="500"></div>
 
+### Ranking
+Our team got ranked 2nd
+<div align="center"><img src="./results/ranking.jpg", width="500"></div>
+
 ## 7. Demo
 ```shell
 1. Clone this repository
 2. Unzip mol file
-3. Run the code in order from procedure 1 to 6 (Use gpu to train, training with cpu will take excessive amount of time)
+3. Run the code in order from procedure 1 to 6
 ```
