@@ -474,8 +474,8 @@ submission.head(3)
 ### Final Result
 <div align="center"><img src="./results/results.png", width="500"></div>
 
-### Ranking
-Our team got ranked 2nd
+### Kaggle Ranking
+Our team ranked 2nd
 <div align="center"><img src="./results/ranking.jpg", width="500"></div>
 
 ## 7. Demo
